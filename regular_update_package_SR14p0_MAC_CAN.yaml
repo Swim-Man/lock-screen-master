@@ -1,0 +1,56 @@
+# The general information
+package:
+  crypto:
+    ecdsaPath: "TransportKeys_v2p0/PrvEcdsa.pem"
+    aesCEKPath: "keys/CEK.pem" # optinal
+    aesMCEKPath: "TransportKeys_v2p0/Mcek.pem"
+    passphraseKey:
+# The specific information
+Bundle:
+  bundleVersion:
+    major: 0x0001
+    minor: 0x0002
+    patch: 0x0003
+    id: 0x1EDB
+  sectorTable:
+    # A single sector with full permission
+    - startPage : 0
+      size : 192
+      attributes : Any
+  componentTable:
+    - compName           : "./SR14p0/SwupSwdHostif.hex"
+      compStartAddress   : 0x401000
+      flashCompAttribute : [Code]
+      compVersion        :
+        major: 2
+        minor: 1
+        patch: 0
+        id: 0xFA01
+    - compName           : "./SR14p0/MACApp_CAN.hex"
+      compStartAddress   : 0x402000
+      flashCompAttribute : [Code]
+      compVersion        :
+        major: 2
+        minor: 1
+        patch: 0
+        id: 0xFAF0
+    # Placeholder for SWUP User Keystore 
+    - compName : "./SR14p0/DummyBinFile_4k.bin"
+      compStartAddress   : 0x4B6000
+      flashCompAttribute : [Data]
+      compVersion :
+        major: 1
+        minor: 0
+        patch: 0
+        id: 0xABCD
+    # SWUP CAN Hostif B
+    - compName           : "./SR14p0/SwupCanHostif_B_V1.hex"
+      compStartAddress   : 0x4B8000
+      flashCompAttribute : [Code]
+      compVersion        :
+        major: 1
+        minor: 0
+        patch: 0
+        id: 0xF00B
+  applicationBoot: [ 0xFAF0, 0, 0, 0]
+  hostifBoot: [ 0xF00B, 0xFA01, 0, 0 ]
